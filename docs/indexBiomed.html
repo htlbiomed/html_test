@@ -26,7 +26,9 @@ h1 {
   flex-direction: column;
   gap: 24px;
   align-items: center;
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #ui {
@@ -36,6 +38,7 @@ h1 {
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-sizing: border-box;
 }
 
 .controls {
@@ -67,6 +70,7 @@ h1 {
   color: #666;
   margin-top: 8px;
   line-height: 1.4;
+  text-align: center;
 }
 
 #status {
@@ -82,6 +86,8 @@ canvas {
   background: #fff;
   display: block;
   margin: 0 auto;
+  max-width: 100%;       /* passt Canvas an kleinere Bildschirme an */
+  height: auto;          /* proportional skalieren */
 }
 
 /* Pads */
@@ -97,23 +103,25 @@ canvas {
 /* Info-Block */
 .info-block {
   text-align: center;
-  margin-top: 2px;
+  margin-top: 4px;       /* Pfeil sitzt näher am Canvas */
 }
 
 .arrow {
   display: block;
-  margin: 0 auto 0px auto;
-  width: 60px;
+  margin: 0 auto 2px auto;
+  width: 50px;           /* kleiner für mobile Geräte */
+  max-width: 15%;
+  height: auto;
   pointer-events: none;
 }
 
 .info-text {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   color: #333;
   text-align: center;
   max-width: 400px;
-  margin: 12px auto;
+  margin: 8px auto;
   line-height: 1.5;
 }
 
@@ -131,7 +139,6 @@ canvas {
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-
 .button-link:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
@@ -142,7 +149,8 @@ canvas {
 #speechBubble {
   position: absolute;
   top: 180px;
-  left: 330px;
+  left: 65%;
+  transform: translateX(-50%);
   background: #ffffff;
   border: 2px solid #333;
   border-radius: 24px; 
@@ -173,6 +181,36 @@ canvas {
   0% { opacity: 0; transform: translateY(-10px); }
   10%, 80% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* === Responsive Anpassungen für Smartphones === */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  #ui {
+    max-width: 95%;
+    padding: 12px;
+  }
+
+  .controls button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .arrow {
+    width: 40px;
+  }
+
+  .info-text {
+    font-size: 15px;
+  }
+
+  #speechBubble {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
 }
 
 
