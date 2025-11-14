@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Biomedizin- und Gesundheitstechnik</title>
-<style>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Biomedizin- und Gesundheitstechnik</title>
+        <link rel="icon" type="image/x-icon" href="img/logo.png">
+        <style>
 /* === Allgemeines Styling === */
 body {
   margin: 0;
@@ -14,10 +15,10 @@ body {
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
-  color: #333;
-  margin-bottom: 16px;
+  color: #4d4b4d;
+  margin-bottom: 2px;
   text-align: center;
 }
 
@@ -27,6 +28,30 @@ h1 {
   gap: 20px;
   align-items: center;
   padding: 20px;
+}
+
+/* === Persönlicher Info-Block Styling === */
+#personalInfoBlock {
+  width: 100%;
+  max-width: 512px; /* Gleiche maximale Breite wie canvasWrap */
+  background: #e0e7ff; /* Helle, freundliche Farbe */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  margin-bottom: 5px; /* Etwas Platz zum Spiel-Container */
+}
+
+#personalInfoBlock p:first-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-top: 0;
+}
+
+#personalInfoBlock p:last-child {
+  font-size: 16px;
+  color: #555;
 }
 
 #ui {
@@ -178,40 +203,56 @@ canvas {
   100% { opacity: 0; transform: translateY(-10px); }
 }
 </style>
-</head>
+    </head>
 
-<body>
-<h1>Biomedizin- und Gesundheitstechnik</h1>
-<div id="container">
-  <div id="ui">
-    <div class="controls">
-      <button id="resetBtn">Reset Zuordnungen</button>
-      <button id="autoBtn">Automatisch Zuordnen</button>
-    </div>
-    <div class="small">
-      Klicke zuerst ein Organ (links) und dann die passende Stelle im Körper an. Wenn alles richtig zugeordnet ist, lacht die Figur!
-    </div>
-    <div id="status">Leg Los!</div>
-  </div>
+    <body>
+        <h1>Biomedizin- und Gesundheitstechnik</h1>
+        <div id="container">
+            <div id="personalInfoBlock">
+                <p>👋 **Willkommen zum Tag der offenen Tür!**</p>
+                <p>Hier hast du die Möglichkeit, einige persönliche
+                    Informationen oder ein kurzes Zitat für deine Webseite
+                    hinzuzufügen, falls du möchtest.</p>
+                <div style="margin-top: 15px;">
+                    <strong>Name:</strong> [Ihr Name]<br>
+                    <strong>Zitat:</strong> [Ihr persönliches Motto oder Zitat]
+                </div>
+            </div>
 
-  <div id="canvasWrap">
-    <canvas id="canvas" width="512" height="768"></canvas>
-    <img id="smoke" src="img/mistake.gif" style="position:absolute;top:0;left:0;width:100%;height:auto;display:none;pointer-events:none;">
-    <div id="speechBubble">Hallo!</div>
-  </div>
+            <div id="ui">
+                <div class="controls">
+                    <button id="resetBtn">Reset Zuordnungen</button>
+                    <button id="autoBtn">Automatisch Zuordnen</button>
+                </div>
+                <div class="small">
+                    Klicke zuerst ein Organ (links) und dann die passende Stelle
+                    im Körper an. Wenn alles richtig zugeordnet ist, lacht die
+                    Figur!
+                </div>
+                <div id="status">Leg Los!</div>
+            </div>
 
-  <div class="info-block">
-    <img src="img/arrow.gif" alt="Pfeil nach unten" class="arrow">
-    <p class="info-text">
-      Hier lernst du so tolle Sachen:<br>
-      <a href="https://www.htl-salzburg.at/biomedizin-gesundheitstechnik.html" class="button-link">
-        HTBLuVA Salzburg Biomedizin & Gesundheitstechnik
-      </a>
-    </p>
-  </div>
-</div>
+            <div id="canvasWrap">
+                <canvas id="canvas" width="512" height="768"></canvas>
+                <img id="smoke" src="img/mistake.gif"
+                    style="position:absolute;top:0;left:0;width:100%;height:auto;display:none;pointer-events:none;">
+                <div id="speechBubble">Hallo!</div>
+            </div>
 
-<script>
+            <div class="info-block">
+                <img src="img/arrow.gif" alt="Pfeil nach unten" class="arrow">
+                <p class="info-text">
+                    Hier lernst du so tolle Sachen:<br>
+                    <a
+                        href="https://www.htl-salzburg.at/biomedizin-gesundheitstechnik.html"
+                        class="button-link">
+                        HTBLuVA Salzburg Biomedizin & Gesundheitstechnik
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script>
 const userName = "Lisa"; 
 const speechBubble = document.getElementById("speechBubble");
 
@@ -384,5 +425,5 @@ window.addEventListener("resize",()=>{ draw(); });
 // Start
 imgBase.onload = draw;
 </script>
-</body>
+    </body>
 </html>
