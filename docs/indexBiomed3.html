@@ -328,21 +328,43 @@ function draw(){
 }
 
 // Klicklogik
-canvas.addEventListener("click",ev=>{
-  const rect=canvas.getBoundingClientRect();
-  const scale = getScale();
-  const x = (ev.clientX - rect.left) / scale;
-  const y = (ev.clientY - rect.top) / scale;
+// Klick- und Touchlogik
+function handleInteraction(ev) {
+    // Verhindert Scrollen/Zoomen auf Mobilgeräten
+    ev.preventDefault(); 
+    
+    const rect = canvas.getBoundingClientRect();
+    const scale = getScale();
+    let clientX, clientY;
 
-  const pad = padUnder(x,y);
-  if(!pad){ selectedPad=null; draw(); return; }
-  if(!selectedPad){ selectedPad=pad; draw(); return; }
-  if(selectedPad.id===pad.id){ selectedPad=null; draw(); return; }
+    // Koordinaten aus Touch- oder Maus-Event ermitteln
+    if (ev.changedTouches && ev.changedTouches.length > 0) {
+        // Touch-Events
+        clientX = ev.changedTouches[0].clientX;
+        clientY = ev.changedTouches[0].clientY;
+    } else {
+        // Maus-Events
+        clientX = ev.clientX;
+        clientY = ev.clientY;
+    }
 
-  toggleEdge(selectedPad.id,pad.id);
-  selectedPad=null;
-  evaluateState();
-});
+    const x = (clientX - rect.left) / scale;
+    const y = (clientY - rect.top) / scale;
+
+    const pad = padUnder(x, y);
+    if (!pad) { selectedPad = null; draw(); return; }
+    if (!selectedPad) { selectedPad = pad; draw(); return; }
+    if (selectedPad.id === pad.id) { selectedPad = null; draw(); return; }
+
+    // Verbindung herstellen/entfernen und Zustand auswerten
+    toggleEdge(selectedPad.id, pad.id);
+    selectedPad = null;
+    evaluateState();
+}
+
+// Event-Listener aktualisieren
+canvas.addEventListener("click", handleInteraction);
+canvas.addEventListener("touchend", handleInteraction);
 
 // Buttons
 resetBtn.onclick=()=>{ edges.clear(); selectedPad=null; currentBg=imgBase; smokeImg.style.display="none"; statusEl.textContent="Zuordnungen entfernt. Leg Los!"; draw(); };
