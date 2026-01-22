@@ -14,7 +14,7 @@
             #personalInfoBlock {
                 width: 95%;
                 max-width: 420px; 
-                background: #e0e7ff; /* ********** Änderung der Farbe ********** */
+                background: #b72882; /* ********** Änderung der Farbe ********** */
                 padding: 20px;
                 border-radius: 12px;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -99,8 +99,10 @@
 
         <script>
 
-// **************** Sprechblase **************** 
+// **************** Sprechblase & Figur anpassen **************** 
 const userName = "Lisa";
+const gender = "female"; // oder "male"
+
 const speechBubble = document.getElementById("speechBubble");
 
 const canvas = document.getElementById("canvas");
@@ -114,10 +116,9 @@ const imgBase = new Image();
 const imgHappy = new Image();
 const imgDmg = new Image();
 
-// ********************* Figuren anpassen *********************
-imgBase.src = "img/body_female.png"; 
-imgHappy.src = "img/body_happy_female.png";
-imgDmg.src = "img/body_sad_female.png";
+imgBase.src  = `img/body_${gender}.png`;
+imgHappy.src = `img/body_happy_${gender}.png`;
+imgDmg.src   = `img/body_sad_${gender}.png`;
 
 const PAD_R = 6;
 const pads = [
